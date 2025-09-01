@@ -23,3 +23,11 @@ Diffusao : gradient strength and duration
 * multiple-shell -> several b-values (mais sinal, menos contraste de diffusao) + differente orientaçoes
 * région importante au isocentro da maquina (pour le gradient) -> centre à 64MHz
 * model : Sj=So exp(-bj xjT D xj)
+
+## Data processing with FSL
+* epi : sequence used for fMRI and diffusion
+  * they have signal distortion and signal loss
+
+### DTI
+
+Malformação 

@@ -24,3 +24,13 @@
     * for each "category" in ASD, if there are clear visual clusters or not
     * only exploratory analysis
     * could analyze connectivity patterns from clustering on behavioral scores
+
+## possible data analysis
+
+1° pure behavioral analysis
+* 2 groups AgCC and ASD
+  * analysis F0
+  * hypersensibility -> index
+  * ...
+
+quelles corrélations regarder ??

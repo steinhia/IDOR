@@ -3,6 +3,7 @@
 * deficit in executive functions
 
 ### Focus on details / integration / complexity
+
 * weak central coherence : cognitive style focused on details -> no global vision or context
   * implicit language : necessitates integration of several info sources + context
   * social : no comprehension of social situations in their globality (too focus on one word etc)
@@ -40,6 +41,7 @@
   * Paradoxical Functional Facilitation : how neurological deficit may induce enhanced perf -> P compensates for non-P processes ?
 
 ### Atypical sensorial processing
+
 * overreactivity as a primary symptom in autism (Liss, 2006)
   * hyp : ind with ASD suffer from overarousal and this primary diff may lead to overselective attention and repetitive behavior.
   * cluster analysis : subgroup with both overreactivity and overselective attention
@@ -62,12 +64,15 @@
     * low registration (high threshold, passive) : do not notice sensory info from the environment -> miss social cues ? 
 
 ## Empathy
+
 * milton 2012 : double empathy problem -> non-ASD lack empathy and understanding of ASD people
 * crompton2020 : "téléphone arabe" : ASD and non-ASD are effective, mixed chains are less effective
   * Effective information transfer requires social communication skills. As autism is clinically defined by social communication deficits, it may be expected that information transfer between autistic people would be particularly deficient. However, the Double Empathy theory would suggest that communication difficulties arise from a mismatch in neurotype; and thus information transfer between autistic people may be more successful than information transfer between an autistic and a non-autistic person.
-* dunn2023 : autistic people ratethemselves as awkward but with appeal to socialize with them -> not universally "undesirable"
+* alkhaldi2021 : neuro-typical dislike more autistic people, they find them awkward and with a lack of empathy
+* dunn2023 : autistic people rate themselves as awkward but with appeal to socialize with them -> not universally "undesirable"
 
 ### General model for hypotheses on autism (inspired from Rubenstein2003)
+
   * 1. Precoce genetic or environmental alteration (gene mutation or atypical environment)
   * 2. Less GABAergic neurons in cortex/amygdale (less produced or migrated)
   * 3. Less inhibition (GABA) compared to excitation (glutamate) = déséquilibre excitation/inhibition
@@ -77,6 +82,7 @@
   * 7. Atypical behavior like in autism (hypersensitivity, rigid memory, less flexibility, increased risk of epilepsy)
 
 ### Other
+
 * Female Autism Phenotype (FAP) hull2020
   * higher social motivation, but difficulty to maintain long-term relationship
   * camouflaging : use of conscious or unconscious strategies, which may be explicitly learned or implicitly developed, to minimise the appearance of autistic characteristics during a social settin
@@ -84,6 +90,7 @@
     * strong associations between camouflaging and poor mental health outcome
 
 ## Findings cognitive tests/behavioral measures
+
 * lau 2012 : high prevalence of ASD among AgCC, but ASD shared with many parents, AgCC not
   * AgCC intermediate scores between control and ASD -> one part of the story ??
 * Wheelwright2010 : Autism Spectrum Quotient (AQ)
@@ -93,6 +100,7 @@
   * more males than females, more scientists, in particular mathematiciens, high prevalence on parents
 
 ## Findings about neuro correlates ASD
+
 * piven1997: smaller CC, bigger cortical regions, especially for parietal
     * smaller only when control for brain size -> maybe only bigger cortical regions, esp. where no connection with the CC
 * Just2006 : underconnectivity fronto-parietal, may come from anatomical constraints (smaller genu CC)
@@ -160,6 +168,7 @@
     * seen in the majority of the cases + preserved topographic organization -> compensatory ?
   * sigmoid bundle : S-shaped, right frontal lobe connected to left occipito-parietal
     * 30% of patients, those who are the most severely impaired -> maladaptative ??
+  * lazarev 2016 : PB and SB play role in synchrony between some heterotopic regions (EEG coherence) 
 * functional connectivity (synchronization of signals)
   * hinkley2012 : underconnectivity of some cortical regions (resting state alpha)
     * frontal, parietal, occipital -> implicated in altered cognitive functions of AgCC
@@ -179,13 +188,21 @@
   * Increased intrahemispheric structural/functional connections -> hyp compensatory mechanisms in AgCC ?
   * hyp compensation : could be that AgCC become more lateralized to compensate for bad IH connectivity
     * more left-handed in (small) population AgCC and right lateralization of left limbic area
+* Szczupak2020 : AgCC affects the interhemispheric synchrony of cortical communication
+  * follows developmental gradient : early developed zones (CC develops antero-posterior and medio-lateral) less affected
+  * posterior level of sensory areas (connect homotopically) affected
+  * cingulate cortex (pioneer axons) synchronized but with a lag
+* myelinized axons from the CC link homotopic regions, terminate in cortex where can activate/not GABAergic neurone
+  * handle balance E/I -> can inhibate other hemisphere -> controls lateralization and synchronization of brain regions
 
 ## Discussion
+
 * reduced axonal density ?
 * reduction in axonal count = global property
 * no differences in FA/MD -> FBA more sensitive ?
 
 ## Limits in studies
+
 * results differ between normalizing CC size by brain size
 * when recruiting AgCC participants, select the lower functioning because they have been diagnosed -> higher occurence of ASD ?
 
@@ -193,12 +210,14 @@
 ## Different ages in studies
 
 ## subregions
+
 * 7 subregions Witelson method
 * in some studies, only anterio, posterior, middle
 
 ## Evaluation of cognitive functions -> create subgroups ?
 
 ## Genetics
+
 * tick 2015: meta-analysis of twin studies on ASD
   * correlations for monozygotic twins (MZ) : .98
   * dizygotic twins (DZ) : 0.53
@@ -224,10 +243,12 @@
     * croisement entre gène T hétérozygote et mutation tufted homozygote
 
 ## Gender differences
+
 * more prevalent on males
 * diagnostic or real gender differences ?
 
 ## Role of the CC
+
 * banich 1998
   * CC often conceived as a mechanism for transferring sensory information and coordinating processing between the hemisphere
   * also role in attentional processing, because allows division of labor between hemispheres (more computational power)
@@ -259,11 +280,18 @@
     * attention : endogenous lateralized LH / exogenous independantly in each hemisphere
     * coordination : split-brain can perform independant tasks with 2 arms, 2 visual searchs, but not 2 decisions (taken successively)
       * advantage for split brain for some simple tasks (parallel performing) but more complex tasks need integration of info
-        * can have 2 independant motor plannings (no need for coordination)
-        * some types of attention (visual search) non-lateralized and faster when stim divided in the 2H , decision-taking 1 att center
+      * can have 2 independant motor plannings (no need for coordination)
+      * some types of attention (visual search) non-lateralized and faster when stim divided in the 2H , decision-taking 1 att center
       * but complex tasks (coordination, complex pbs) performed using one attention center even for split-brain, in subcortical areas ?
+* monteiro 2019 : lateralization of activation (language and S1 and S2) occurs in AgCC, no symetric activation -> aberrant bundles ?
+  * lateralization is not an explication for the absence of split-brain syndromk
+* szczupak2022 : new technics that enables to better detect sparle/less dense heterotopic connections -> underestimated!
+  * 75% of heterotopic connections in the mice brain, principally in the central core of the CC <-> homotopic periphery
+    * more numerous in brains with malformations (probst bundles) -> were considered atypical
+    * heterotopic connections are compensatory connections ?
 
 ## Description of CC agenesis
+
 * Glass 2008 :
   * prevalence 2/10000,
   * frequent associated Central Nervous system malformations (49%) and social impairments of autism etc.,
@@ -284,7 +312,9 @@
 * paul 2014 : problems in attention (mostly), social function, thought, and somatic complaints, no specific interest/attention to detail
 
 The cores syndrome includes: (brown2019)
+
 (1) Reduced interhemispheric transfer of sensory-motor information;
+
   * interhemispheric integration of easy stimuli, but not more difficult tasks
   * deficit in bimanual coordination (mueller, 2009, gooijers2013)
     * CC develops slowly + bimanual coord siminal for children/AgCC -> suggests CC essential for bimanual coordination
@@ -300,10 +330,14 @@ The cores syndrome includes: (brown2019)
     * commissurotomy -> possible encoding And retrieving in each hemisphere without CC
       * weaker memory = consequence of poor integration ?
     * one interpretation of the results reported herein is that verbal learning and memory are deficient due to an inability to enhance the serial word memory expressed by the left hemisphere with the broader semantic fields of the right hemisphere
+    
 (2) Reduced cognitive processing speed;
-    * differences in cognitive control primary resulting from low processing speed (marco2012)
-    * exacerbated when higher task demand (mathias 2004)
+
+  * differences in cognitive control primary resulting from low processing speed (marco2012)
+  * exacerbated when higher task demand (mathias 2004)
+
 (3) Deficits in complex reasoning and novel problem-solving. 
+
   * interhemispheric resources are recruited to assist with cognitively complex tasks (koivisto2000)
   * schieffer2000 : impaired for more complex tasks
     * impairment in abtract reasoning (brown2000), concept formation (fischer1992), problem-solving/formulating strategies (brown2012), generalization (solursh1965)
@@ -315,7 +349,9 @@ The cores syndrome includes: (brown2019)
     * diff in generating stories/meaningful cognitive associations to connect pair of words (turk2010) 
       * -> due to poor integration verbal/semantic LH/RH ?
       * link to memory (paul2016)
+      
 (4) hyp : difficulty to understand complex information/integrate sensory/emotional/cognitive information -> difficulty in social behavior
+
   * diff in understanding emotions/language with emotion
     * difficulties in identifying and describing feelings (paul, 2021)
       * but similar levels of emotional experience and emotional coping (paul2021)
@@ -355,6 +391,7 @@ The cores syndrome includes: (brown2019)
   * diff sustained conversation, but no lack of interest (paul2014)
 
 ## Link between ASD and AgCC
+
 * AgCC brains can compensate from the very beginning, in ASD arrives later, less plasticity
 * genetics :
 * connectivity :
@@ -366,6 +403,7 @@ The cores syndrome includes: (brown2019)
 ## Cognitive science in general 
 
 ### Discourse theory (mason 2006)
+
 * dynamic recruitment of cortical networks in response to text constraints
 * old discourse theories (coarse coding, construction integration framework, salience hypothesis...)
 * 3 theories role RH
@@ -390,4 +428,64 @@ The cores syndrome includes: (brown2019)
 
 ## ideas of relevant analyses
 
-* correlation between social skills and sensory deficits (Hilton2007) -> correlation only in ASD but not in AgCC ?
+* deficits specific to one of the categories / only score in the 2 categories
+  * motor deficit could differ greatly
+  * every psycho test can be compared between the 2 categories
+  * genetics
+  * psycho etc etc
+
+* hypotheses regarding the 2 hypotheses
+  * AgCC : primary deficit = disconnection between hemispheres
+    * motor, coordination
+  * ASD : primary deficit = local hyperconnectivity/global hypoconnectivity
+    * preference local/global, hypersensitivity..
+    * hypersensitivity linked to attention -> in AgCC ??
+
+* correlations between several "categories" of deficits
+  * hilton2007: correlation between social skills and sensory deficits -> correlation only in ASD but not in AgCC ?
+  * social skills/motor skills
+  * gomes2008: hypersensitivity correlated with attention 
+  * executive functions
+  * dwyer2014 : hyperfocus correlated with quality of life
+
+* neuro : correlation morphometry/fiber density -activations/test results
+  * alexander2007 : processing speed (bimanual coordination, other tests...) /morphometry / DTI (FA, MD..)
+  * hinkley2012 : rs functional connectivity/executive functions
+  * mason2008 : FC between frontal/parietal correlated with size of the CC genu
+  * depretto2005 : activity NMS correlated with social ability
+  * diamond2019 : social impairment/size of the splenium
+  * hett2006 : sizeof the anterior commissure / "cognition" in AgCC
+  * lefebvre2014 : intelligence/brain volume
+
+
+* review language Julio
+  * connexion (structural connectivity DWI) of different part of Broca to different part of frontal cortex
+    * anterior : semantics
+    * posterior : phonology, syntax, motor coordination
+  * AgCC dispraxia : disruption of salience and fronto-parietal network, symptom disappears, diff disappears
+    * split-brain "against the patient will"
+  * semantics -> temporal, phonology -> frontal
+  * vandermerwe2021 : 
+    * 
+* A four-level model for the characterization of pathological speech
+  * sensorimotor control (linguistic-symbolic planning) : temporal-parietal, Broca, 
+    * sound map : left ventral premotor cortex  
+  * speech-motor planning (sequential organization of movements for each sound + co-articulation (frontal cortical areas)) : 
+    * inverse models generate motor commands / forward model predicts consequences of the motor commands -> inability to form sounds/ start-restart behavior ?
+    * cortical areas in the dominant hemisphere : prefrontal cortex, Area 6, supplementary motor areas, 5 and 7 (posterior parietal), Broca and Wernicke
+  * speech motor programming (specification of muscle's movements, velocity etc + suprasegmental/emotional information) -> duration atipical ?
+    * rapid compensatory speech movements / auditory feedback
+    * cortical-subcortical circuits : sensorimotor cortex, lateral cerebellum, basal ganglia
+  * speech execution : descending instructions to the lowest levels of control
+* AOS : lesion cortical motor areas responsible for planning 
+  * left ventral premotor cortex ?
+  * disruption of both motor planing and/or programming (diff to differentiate) : deficient prosody, slow speech rate, accuracy of articulation, syllabic speech
+
+
+* summary of zones of interest
+  * structural connectivity of different part of Broca to different part of frontal cortex -> diffusion
+  * dispraxia : frontoparietal network -> rs-fmri
+  * semantics -> temporal, phonology -> frontal
+  * sound map : left ventral premotor cortex -> rs (correlation with SMA, Broca..) 
+  * speech motor planning : cortical areas in the dominant hemisphere : prefrontal cortex, Area 6, supplementary motor areas, 5 and 7 (posterior parietal), Broca and Wernicke
+  * speech motor programming : cortical-subcortical circuits : sensorimotor cortex, lateral cerebellum, basal ganglia
