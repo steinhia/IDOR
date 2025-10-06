@@ -49,11 +49,40 @@ def extract_processing_speed( instr_col='Instruments used', max_tests=2):
     return df
 #df=extract_processing_speed()
 
-def extract_processing_speed_general( instr_col='Instruments used', max_tests=2):
+def extract_redcap_general(df,first_column,test_names,length_tests,instr_to_index, instr_col='Instruments used'):
+    df = df.dropna(subset=[instr_col])
+    # creates .0 columns and raw columns to store the results
+    test_results = df.columns[first_column:first_column + length_tests]
+    df = df.rename(columns={c: f"{c}.0" for c in test_results})
+    split_tests = df["Instruments used"].fillna("").str.split(",").apply(lambda x: [t.strip() for t in x if t.strip()])
+    for name in test_names:
+        df[name] = split_tests.apply(lambda lst: next((t for t in lst if name.lower() in t.lower()), None))
+
+    # for each test_type ("Visual Search", "Coding" etc)
+    for tname in test_names:
+        # for each result type ("Raw Score", "Scaled Score")
+        for tres in test_results:
+            df[f"{tname}_{tres}"] = df.apply(
+                lambda row: (
+                    row[f"{tres}.{instr_to_index[row[tname]]}"]
+                    if pd.notna(row[tname]) else np.nan
+                ),
+                axis=1
+            )
+    # clean dataframe
+    cols_to_drop = [
+        c for c in df.columns
+        if any(r in c for r in test_results) and not any(c.startswith(t + "_") for t in test_names)
+    ]
+    df = df.drop(columns=cols_to_drop)
+    return df
+
+def extract_processing_speed():
     df=pd.read_csv(csv_folder+"ProcessingSpeed.csv")
-    df = df.dropna(subset=["Instruments used"])
     first_column=4
     length_tests=2
+    test_names=["Coding","Symbol Search"]
+    test_results=["Raw Score","Scaled Score"]
     instr_to_index = {
         "Coding A (WISC-IV)": 0,
         "Coding B (WISC-IV)": 2,
@@ -62,39 +91,22 @@ def extract_processing_speed_general( instr_col='Instruments used', max_tests=2)
         "Symbol Search B (WISC-IV)": 3,
         "Symbol Search (WAIS-III)": 5
     }
-    # creates .0 columns and raw columns to store the results
-    tests = df.columns[first_column:first_column + length_tests]
-    df = df.rename(columns={c: f"{c}.0" for c in tests})
-    for c in tests:
-        df[c] = df[f"{c}.0"]
+    return extract_redcap_general(df,first_column,test_names,length_tests,instr_to_index)
+#df=extract_processing_speed()
 
-    # On split sur la virgule et on enlève les espaces autour
-    split_tests = df["Instruments used"].fillna("").apply(lambda x: [t.strip() for t in x.split(",") if t.strip()])
+def extract_working_memory():
+    df=pd.read_csv(csv_folder+"WorkingMemory.csv")
+    df.insert(20, "Total Score.2", "")
+    df.insert(21, "Scaled Score.2", "")
+    first_column=4
+    length_tests=6
+    test_names=["Digit Span","Corsi Blocks"]
+    instr_to_index = {
+        "Digit Span (WAIS III)": 0,
+        "Digit Span (WISC-IV)": 1,
+        "Corsi Blocks": 2
+    }
+    return extract_redcap_general(df,first_column,test_names,length_tests,instr_to_index)
+df=extract_working_memory()
 
-    # Créer Test1 … TestN
-    for i in range(length_tests):
-        df[f"Test{i + 1}"] = split_tests.apply(lambda x: x[i] if i < len(x) else None)
-
-    pdb.set_trace()
-    df = df[[*df.columns[:first_column],
-             *[f"{c}.0" for c in df.columns[first_column:first_column + length_tests]],
-             *df.columns[first_column + length_tests:],
-             *df.columns[first_column:first_column + length_tests]]]
-    #df = df.assign(**{f"{c}.0": df[c] for c in df.columns[first_column:first_column + length_tests]})
-    pdb.set_trace()
-
-    df = df.dropna(subset=["Instruments used"]).drop(columns=["Repeat Instrument", "Repeat Instance"])
-    df = df.rename(columns=lambda x: x + ".0" if x.endswith("Raw Score") or x.endswith("Scaled Score") else x)
-    cols = list(df.columns)
-    instr_split = df["Instruments used"].where(df["Instruments used"].notna() & (df["Instruments used"] != '')).str.split(r'\s*,\s*')
-    df["Coding"] = instr_split.apply(lambda x: next((int(instr_to_index[i]) for i in x if "Coding" in i), np.nan) if isinstance(x, list) else np.nan)
-    df["Search"] = instr_split.apply(lambda x: next((int(instr_to_index[i]) for i in x if "Symbol Search" in i), np.nan) if isinstance(x, list) else np.nan)
-    pdb.set_trace()
-    df["Coding_Raw"] = df.apply( lambda row: row[f"Raw Score.{int(row['Coding'])}"] if not pd.isna(row["Coding"]) else np.nan, axis=1 )
-    df["Coding_Scaled"] = df.apply( lambda row: row[f"Scaled Score.{int(row['Coding'])}"] if not pd.isna(row["Coding"]) else np.nan, axis=1 )
-    df["Search_Raw"] = df.apply( lambda row: row[f"Raw Score.{int(row['Search'])}"] if not pd.isna(row["Search"]) else np.nan, axis=1 )
-    df["Search_Scaled"] = df.apply( lambda row: row[f"Scaled Score.{int(row['Search'])}"] if not pd.isna(row["Search"]) else np.nan, axis=1 )
-    print(df[["Coding", "Coding_Raw", "Coding_Scaled", "Search", "Search_Raw", "Search_Scaled"]])
-    return df
-df=extract_processing_speed_general()
 pdb.set_trace()
