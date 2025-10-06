@@ -7,6 +7,7 @@ from textgrid import TextGrid, IntervalTier
 import textgrid
 import pdb
 from scipy.signal import butter, filtfilt, hilbert
+import scipy.signal as sps
 import tgt
 import os
 
@@ -31,7 +32,6 @@ def apply_vad(wav,sr):
 def create_TextGrid(wav_path,speech_timestamps,wav,sr):
     textgrid_path = wav_path.replace('.wav','.TextGrid')
     if not os.path.exists(textgrid_path):
-        textgrid = TextGrid(speech_timestamps)
         tg = TextGrid(minTime=0, maxTime=float(wav.shape[1] / sr))
         tier = IntervalTier(name='vad', minTime=0, maxTime=float(wav.shape[1] / sr))
 
@@ -62,7 +62,7 @@ def get_vad_intervals(textgrid_file):
                         if interval.text == "silence"]
     return speech_intervals,silence_intervals
 
-def compute_envelope(wav, sr, speech_intervals):
+def get_wav_concat(wav,speech_intervals):
     if not speech_intervals:
         raise ValueError(f"No speech interval found in {textgrid_path}")
 
@@ -71,11 +71,13 @@ def compute_envelope(wav, sr, speech_intervals):
     for start, end in speech_intervals:
         start_idx = int(start * sr)
         end_idx = int(end * sr)
-        wav_segments.append(wav[start_idx:end_idx])
+        wav_segments.append(wav[0][start_idx:end_idx])
     wav_concat = np.concatenate(wav_segments)
+    return torch.from_numpy(wav_concat)
 
+def compute_envelope(wav_concat, sr, speech_intervals):
 
-    analytic_signal = hilbert(wav.numpy())
+    analytic_signal = hilbert(wav_concat)
     amplitude_envelope = np.abs(analytic_signal)
 
     def lowpass(data, sr, cutoff=10.0):
@@ -95,69 +97,52 @@ def compute_envelope(wav, sr, speech_intervals):
 
 def compute_monotony(envelope_segment):
     amplitude = np.max(envelope_segment) - np.min(envelope_segment)
-
-    # Calculer écart-type
     std_dev = np.std(envelope_segment)
-
-    # Coefficient de variation (optionnel)
     mean_val = np.mean(envelope_segment)
     coef_var = std_dev / mean_val if mean_val > 0 else 0
 
-    # Tu peux choisir l’indicateur qui te parle le plus
+    print("amplitude: ",amplitude)
+    print("std_dev: ",std_dev)
+    print("coef_var: ",coef_var)
     return amplitude, std_dev, coef_var
 
 def mean_pause_duration(silence_intervals):
-    return np.mean([s[1]-s[0] for s in silence_intervals])
-
-def speechrate(wav_path,speech_intervals):
-
-    # Analyser le fichier audio
-    resultats = mysp.analyze(wav_path)
-
-    pdb.set_trace()
-    # Accéder au nombre de syllabes détectées
-    syllable_count = analysis['syllable_count']
-
-    # Calculer le speech rate (syllabes par seconde)
-    duration = analysis['duration']  # Durée totale de l'audio en secondes
-    speech_rate = syllable_count / duration
-
-    print(f"Speech Rate: {speech_rate:.2f} syllables per second")
+    mpd= np.mean([s[1]-s[0] for s in silence_intervals])
+    print("mean pause duration: ",mpd)
+    return mpd
 
 
+def estimate_speech_rate(waveform, sr):
+    # Etract envelop in the vowel band (300–4000 Hz)
+    bandpass = torchaudio.functional.bandpass_biquad(waveform, sr, 1000, Q=0.707)
+    env = torch.abs(torch.from_numpy(sps.hilbert(bandpass.squeeze().numpy())))
 
-def estimate_speech_rate(audio_file, threshold=0.02, frame_length=1024, hop_length=512):
-    # TODO investigate how calculate speech rate
-    # Charger l'audio
-    waveform, sr = torchaudio.load(audio_file)
-    waveform = waveform.mean(dim=0)  # convertir en mono si nécessaire
+    # Smooth enveloppe
+    env_smooth = torch.from_numpy(sps.medfilt(env, kernel_size=201))
+    env_smooth = env_smooth.numpy() if hasattr(env_smooth, "numpy") else env_smooth
 
-    # Calculer l'énergie du signal par frame
-    energy = waveform.unfold(0, frame_length, hop_length).pow(2).mean(dim=1)
+    # peak detection
+    peaks, _ = sps.find_peaks(env_smooth, distance=sr * 0.1, height=env_smooth.mean())
+    n_syllables = len(peaks)
 
-    # Détecter les frames au-dessus du seuil → approximation des syllabes
-    onsets = (energy > threshold).nonzero(as_tuple=True)[0]
-
-    # Speech rate approximatif
     duration = waveform.shape[0] / sr
-    pdb.set_trace()
-    return len(onsets) / duration if duration > 0 else 0
+    speech_rate = n_syllables / duration
 
-# Load audio
+    print(f"Syllabes estimées (acoustique): {n_syllables}")
+    print(f"Durée: {duration:.2f}s")
+    print(f"Speech rate ≈ {speech_rate:.2f} syll/s")
+
 for i in range(1,2):
     wav_path = 'data/1.wav'
     wav,sr=load_audio(wav_path)
     speech_timestamps = apply_vad(wav, sr)
     textgrid_path=create_TextGrid(wav_path,speech_timestamps, wav, sr)
     speech_intervals,silent_intervals = get_vad_intervals(textgrid_path)
-    smoothed_envelope=compute_envelope(wav, sr,speech_intervals)
+    wav_concat=get_wav_concat(wav,speech_intervals)
+    smoothed_envelope=compute_envelope(wav_concat, sr,speech_intervals)
     amplitude, std_dev, coef_var= compute_monotony(smoothed_envelope)
-    print("amplitude: ",amplitude)
-    print("std_dev: ",std_dev)
-    print("coef_var: ",coef_var)
     mpd=mean_pause_duration(silent_intervals)
-    print("mean pause duration: ",mpd)
-    estimate_speech_rate(wav_path)
+    estimate_speech_rate(wav_concat,sr)
 
 
 

@@ -1,6 +1,7 @@
 ## Behavioral/cognitive description of autism : some "modeling theories"
 
 * deficit in executive functions
+  * concept formation, cognitive flexibility, fluency, action planning, response inhibition, and working memory
 
 ### Focus on details / integration / complexity
 
@@ -11,7 +12,7 @@
   * initial version : inability to integrate info, later version : local processing bias
 * baron-cohen 2006: hyper-systemizing theory of autism proposes that the systemizing mechanism is set too high in people with autism
   * difficulty to cope with high-variance systems
-  * // wcc but for positive reasons : serves a purpose(understanding a system)
+  * // wcc but for positive reasons : serves a purpose (understanding a system)
 * monotropism murray2005 : low range of interests // wcc 
   * competition for attention shapes cognitive processes
   * lack of generalization
@@ -284,7 +285,7 @@
       * some types of attention (visual search) non-lateralized and faster when stim divided in the 2H , decision-taking 1 att center
       * but complex tasks (coordination, complex pbs) performed using one attention center even for split-brain, in subcortical areas ?
 * monteiro 2019 : lateralization of activation (language and S1 and S2) occurs in AgCC, no symetric activation -> aberrant bundles ?
-  * lateralization is not an explication for the absence of split-brain syndromk
+  * lateralization is not an explication for the absence of split-brain syndrom
 * szczupak2022 : new technics that enables to better detect sparle/less dense heterotopic connections -> underestimated!
   * 75% of heterotopic connections in the mice brain, principally in the central core of the CC <-> homotopic periphery
     * more numerous in brains with malformations (probst bundles) -> were considered atypical
@@ -398,7 +399,8 @@ The cores syndrome includes: (brown2019)
   * alteration of inter-hemispheric connectivity
     * AgCC : Reduced interhemispheric transfer of sensory-motor information
     * ASD : 
-* symptoms : 
+* social
+  * 
 
 ## Cognitive science in general 
 
@@ -489,3 +491,196 @@ The cores syndrome includes: (brown2019)
   * sound map : left ventral premotor cortex -> rs (correlation with SMA, Broca..) 
   * speech motor planning : cortical areas in the dominant hemisphere : prefrontal cortex, Area 6, supplementary motor areas, 5 and 7 (posterior parietal), Broca and Wernicke
   * speech motor programming : cortical-subcortical circuits : sensorimotor cortex, lateral cerebellum, basal ganglia
+
+\newpage
+
+# Summary key aspects of ASD
+
+* A variety of symptoms :
+  * Many shared with AgCC
+    * Communication and social interaction
+    * Attention switching disorder / overselective attention
+    * Difficulty in novel and complex tasks
+    * Lack of imagination
+  * More specific to ASD
+    * Restricted and repetitive behaviors
+    * Hypersensibility
+    * productive prosody in ASD only ?
+
+* No known physical/anatomical cause
+
+## cognitive theories : 
+
+* deficit in executive functions
+  * could come from underconnectivity fronto-parietal
+* weak central coherence : cognitive style focused on details 
+  * no global vision or context
+  * no flexible integration of various sources
+* complexity theory : deficit in integrative context, but not in associative context 
+  * natural consequence : focus on details
+* monotropism : low range of interest
+  * competition for attention
+  * hyperawareness within the attentinal tunnel, hypoawareness outside it
+* hyper-systematization theory : difficulty to cope with high variance systems -> needs good integration 
+
+## summary in one neuro-oriented theory 
+
+* local overconnectivity / global underconnectivity
+
+
+# Summary key aspects of AgCC
+
+The cores syndrome includes (not independant) : (brown2019)
+
+## (A) more specific to AgCC, less frequent in ASD 
+
+(1) Reduced interhemispheric transfer of sensory-motor information 
+* motor : good integration for easy stimuli, not for more difficult tasks
+  * deficit in bimanual coordination, tests with various bi-modalities
+* memory : difficulties encoding verbal and visual information in memory and spontaneously retrieving newly learned information (erickson2014)
+  * possible interpretation : verbal learning and memory deficient due to inability to use RH semantic information to enhance LH word memory 
+
+(2) Reduced cognitive processing speed 
+  * differences in cognitive control primary resulting from low processing speed (marco2012)
+  * exacerbated when higher task demand (mathias 2004)
+
+## (B) less specific to AgCC, mostly shared with ASD 
+
+(3) Deficits in complex reasoning and novel problem-solving 
+* cognitively complex task : impaired in AgCC (Schieffer2000), interhemispheric resources recruited (koivisto2000)
+  * impairment in abtract reasoning (brown2000), concept formation (fischer1992), problem-solving/formulating strategies (brown2012), generalization (solursh1965)
+  * novel task : no deficits in overlearned cognitive processes (erickson2013), benefit of interhemispheric processing decreases with practice (cherbuin2005)
+* creativity : diff generating stories (turk2010), coherent stories but low diversity (brown 2024)
+  * due to poor integration verbal/semantic LH/RH ?
+  * model of creativity : interhemispheric inhibition (diversity of cognitive perspectives) then IH integration (creative ideas)
+* lack of attention
+  
+(4) hyp : difficulty to understand complex information/integrate sensory/emotional/cognitive information -> difficulty in social behavior
+* diff in understanding emotions/language with emotion
+  * intact emotional experience and emotional coping (paul2021)
+  * impaired emotional interpretation/cognitive processing ->
+    * identifying
+    * describing
+    * integration cognitive and emotional info/abstract reasoning in nuanced social contexts/ judge appropriate social norms
+    * deficit recognition of faces (complex material!) (paul2016)
+    * diff in imagining and inferring the mental, emotional, and social functioning of others (kang2009)
+  * intact literal language processing
+  * impaired emotional prosodic analysis, nonliteral/proverb language interpretation
+    * emotional prosody requires information from both hemispheres (both LHDamage and RHD have deficits)
+    * bad integration of HD info (face recognition/emotional) and HG (analytic processing/details)
+    * deficits especially seen in more complex tasks (require more integration)
+* diff in acting
+  * deficit in adaptative/flexible behavior : rigid application of social norms /no use of context to adapt (brown2021)
+    * bad use of available info to take a good decision
+    * more impulsivity/ less inhibition (tendancy to answer precipitated or inappropriate)
+    * low planification, organisation
+  * no lack of interest, but diff sustained conversation
+
+## Why are they common symptoms between ASD and AgCC
+
+* AgCC : no CC -> connectivity deficit, mostly inter-hemispheric
+* ASD : local hyperconnectivity -> global underconnectivity
+* both have connectivity deficits / difficulty in integrating information from different regions
+
+# Hypothesis about common symptoms
+
+* mostly in the social domain / complex tasks (because social tasks are complex..)
+* mostly due to bad integration of information from different sources
+
+* integration deficit between LH and RH
+  * LH: lexical, syntax
+    * Inferior Frontal Gyrus (IFG), Superior and Middle Temporal Gyrus (STG, MTG)
+  * RH : use of context for semantics, emotion recognition
+    * Superior Temporal Sulcus (STS) : prosody, social indices, intentions
+    * Middle Temporal Gyrus (MTG) : Coarse Semantics, social and affective stimuli -> integration role
+    * Temporo-Parietal Junction (TPJ) : Other's Perspective, ToM, comprehension beyond sentence
+  * discourse theory (mason2006)
+    * LH sentence network
+      * syntactic structure, word meaning, visual/graphemic, phono and lexical-semantic processing
+    * RH Coarse semantic processing network
+    * LH test integration network
+    * bilateral network for interpreting agent's perspective
+  * hyp : structural/functional integrity of fronto-parietal network (low size, low connectivity rs)
+    * The fronto-parietal network supports top-down integration of information across modalities and time scales
+* Multimodal integration deficit
+  * hyp fct :
+    * Lower connectivity between STS and visual/auditory regions.
+    * Lower connectivity between LH and RH hubs
+  * hyp struct :
+    * reduced volume in integrative regions : temporo-parietal junction and superior temporal sulcus (integrate visual, auditory, and social cues) (par2021)
+    * DTI : reduced integrity of posterior CC and inferior longitudinal fasciculus
+* Complex task
+  * hyp fct :
+    * Reduced connectivity within the fronto-parietal network (abstract reasoning, strategy use, and flexible adaptation)
+  * hyp struct :
+    * Reduced integrity of anterior CC and superior longitudinal fasciculus (SLF), weakening communication between frontal and parietal control regions
+    * lower volume fronto-parietal network : DLPFC and posterior parietal cortex (PPC)
+* Emotion recognition / Prosody / semantics integration
+  * hyp fct :
+    * Weaker connectivity between RH temporal regions (STS, MTG, TPJ) and LH frontal regions (IFG, STG, MTG) -> no integration of emotion into language
+  * hyp struct :
+    * Reduced volume/fiber integrity in RH STS/MTG and bilateral amygdala
+    * lower integrity splenium 
+
+
+
+* hyp to be continued ...
+
+# ASD-specific (non-AgCC) inspired hypothesis
+
+* could be linked to local hyperconnectivity
+
+* connectivity deficits in 4 networks (elton2015):
+  * the default-mode network -> preserved in AgCC
+  * the dorsal attention network, 
+  * the salience network, 
+  * the executive control network (or fronto-parietal network) -> th ASD = deficit executive function
+  * monotropism account of ASD (dwyer2024) :
+    * atypical regulation of attention rather than deficit, both increased endogenous hyper-focus and increased susceptibility to exogenous attention capture 
+    * DAN and VAN overactivated during task-related fmri, giving less flexibility to ECN
+  * hyp : relatively preserved in AgCC, contrary to ASD
+
+* hypersensitivity and attention 
+  * in ASD : attention linked to hypersensitivity -> in AgCC ?
+    * hyp: overselective attention/repetitive behavior compensation mechanisms (liss2006) -> predictable/repetitive events moderate arousal level
+  * connectivity of the dorsal attention network/ventral attention network
+  * size of the parietal cortex 
+  * hyp : no hypersensitivity in AgCC / lower correlation with attention ?
+
+* cerbellum smaller in ASD, implicated in inhibition/excitation ratio -> less inhibition
+  * Abnormal Cortico-Cerebellar Functional Connectivity with regions related to functions affected in ASD (social cognition)ramos2019
+  * should not be the case in AgCC ? to verify
+  * in AgCC, higher cerebellum activation in rs-fmri (siffredi2021) -> alternative pathway
+
+* size/DTI of the CC (for ASD and partial)
+  * in general frontal/genu, parietal/body, occipital/splenium
+    * hyp : genu (anterior) would form first, then more and more posterior -> compatible : remnant CC more genu part
+    * TODO different functions
+  * FC between frontal/parietal correlated with size of the CC genu
+  * negative correlation social impairment / fiber density in the CC splenium
+  * AgCC : underconnectivity fronto-parietal -> executive functions
+    * normal activation of each region
+    
+# AgCC-specific inspired hypothesis
+
+* hyp comes from disrupted inter-hemispheric communication
+
+* motor deficit
+  * motor coordination, integration of stimuli in different modalities
+  * hyp : under-connectivity motor regions left/right (M1, SMA, parietal..) + correlated with bimanual tasks
+  * hyp : higher connectivity in ASD, and for more complex tasks, higher correlations connectivity/score
+  
+* low processing speed
+  * lower homotopic connectivity ?? (exploratory)
+  * ASD and partial : PS correlated with integrity of callosal fibers
+  * Processing speed correlated with integrity of WM tracts in parietal / temporal cortices / left middle frontal gyrus (turken2008)
+
+* lateralization (hinkley2016)
+  * rs-fmri : intra-hemispheric connectivity VS inter-hemispheric connectivity
+
+  
+  
+  
+
+
+
