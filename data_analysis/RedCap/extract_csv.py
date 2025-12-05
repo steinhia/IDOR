@@ -107,6 +107,5 @@ def extract_working_memory():
         "Corsi Blocks": 2
     }
     return extract_redcap_general(df,first_column,test_names,length_tests,instr_to_index)
-df=extract_working_memory()
+#df=extract_working_memory()
 
-pdb.set_trace()

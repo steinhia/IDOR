@@ -5,6 +5,9 @@ import pdb
 import re
 import numpy as np
 csv_folder="csv/"
+import subprocess
+from openpyxl import load_workbook
+from extract_csv import extract_neuro_classification
 
 # pre-escolar escolar
 echelles = {
@@ -38,6 +41,52 @@ def verify_partition(echelles):
     print("Out of range:", out_of_range)
 #verify_partition(echelles)
 
+def calculate_SRS2_id(id_subject,responses,test_type):
+    # load file
+    wb = load_workbook(csv_folder + "SRS2_correction.xlsx")
+    corr = wb["Correção"]
+
+    # 2. Write results
+    corr['B1'] = test_type
+    corr['B2'] = int(0)
+    for idx,i in enumerate(range(5, 70)):
+        corr['C' + str(i)] = responses[idx]
+
+    # 3. save temp file
+    temp_path = csv_folder+"temp_input.xlsx"
+    wb.save(temp_path)
+
+    # 4. Calculation with LibreOffice headless
+    subprocess.run(["libreoffice", "--headless", "--calc", "--convert-to", "xlsx", "--outdir", ".", temp_path], check=True)
+
+    # 5. Read calculated values
+    keys = ["TOTAL", "PERCEPÇÃO SOCIAL", "COGNIÇÃO SOCIAL", "COMUNICAÇÃO SOCIAL", "MOTIVAÇÃO SOCIAL", "PADRÕES RESTRITOS E REPETITIVOS", "COMUNICAÇÃO E INTERAÇÃO SOCIAL"]
+    wb2 = load_workbook("temp_input.xlsx", data_only=True)  # <-- data_only=True lit les valeurs, pas les formules
+    ws2 = wb2["Correção"]
+    values = [ws2[f"I{row}"].value for row in range(5, 12)]
+    res = dict(zip(keys, values))
+    return pd.DataFrame({ "subj_id": [id_subject] * len(keys), "key": keys, "value": values })
+
+def calculate_SRS2(df,repeat_calculation=True):
+    tests = {1: "pre", 2: "escolar", 3: "adulto a", 4: "adulto h"}
+    if repeat_calculation:
+        all_results = []
+        for _, row in df.iterrows():
+            id_subject = row["subj_id"]
+            test_type = tests[row["srs2_botao"]]
+            responses = row.iloc[1:66].tolist()
+            all_results.append(calculate_SRS2_id(id_subject, responses,test_type))
+        final_df = pd.concat(all_results, ignore_index=True)
+        final_df.to_csv(csv_folder + "SRS2_results.csv", index=False)
+        df_wide = final_df.pivot(index='subj_id', columns='key', values='value').reset_index()
+        df_wide.to_csv(csv_folder + "SRS2_results_readable.csv", index=False)
+    else:
+        final_df=pd.read_csv(csv_folder + "SRS2_results.csv")
+    return final_df
+
+
+
+#resultats = calculate_SRS2()
 
 def extract_SRS2():
     df=pd.read_csv(csv_folder+"SRS2.csv")
@@ -66,29 +115,30 @@ def extract_SRS2():
         value_name='value'  # valeur de la réponse
     )
     df_long['answer_id'] = df_long['answer_id'].astype(int)
-    question_to_subscale = {int(q): scale for scale, questions in echelles.items() for q in questions}
-    # assign subscale
-    df_long['subscale'] = df_long['answer_id'].map(question_to_subscale)
-    df_long.to_csv(csv_folder+"SRS2_res.csv")
+    return df
+
+def analyse_SRS2(df):
+    #neuro classification
+    df_neuro = extract_neuro_classification()[['Record ID', 'Neuro_classification']].rename(columns={'Record ID': 'subj_id'})
+    df = df.merge(df_neuro, on='subj_id', how='inner')
+
+    # Number of subjects of each group
+    print("number of subjects of each group",df.groupby('subj_id').first().groupby('Neuro_classification').count()['key'])
+
+    # mean score
+    print("mean score by scale \n",df.groupby('key').agg({'value': 'mean'}))
+    print("mean score by scale and Neuro classification\n ",df.groupby(['key','Neuro_classification']).agg({'value': 'mean'}).unstack())
+
+    df['above_60'] = df['value'] > 50
+    print("proportion above threshold \n", df.groupby('key')['above_60'].mean())
+    print("proportion above threshold \n ", df.groupby(['key','Neuro_classification'])['above_60'].mean().unstack())
 
 
-    # possible analysis : mean score
-    sum_by_patient_subscale = df_long.groupby(['subj_id', 'subscale'])['value'].sum().reset_index(name='sum_score')
-    mean_score_by_subscale = sum_by_patient_subscale.groupby('subscale')['sum_score'].mean().reset_index(name='mean_score')
-
-    # number of patients above threshold
-    total_patients = sum_by_patient_subscale['subj_id'].nunique()
-    count_over_60 = sum_by_patient_subscale.groupby('subscale').apply(
-        lambda x: (x['sum_score'] > 60).sum()
-    ).reset_index(name='n_over_60')
-    count_over_60['percent_over_60'] = 100 * count_over_60['n_over_60'] / total_patients
-    result = mean_score_by_subscale.merge(count_over_60, on='subscale')
-
-    ## TODO regarder normes
-
-    pdb.set_trace()
 
 
-extract_SRS2()
-
+df=extract_SRS2()
+final_df=calculate_SRS2(df,repeat_calculation=False)
 pdb.set_trace()
+analyse_SRS2(final_df)
+pdb.set_trace()
+
