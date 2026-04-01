@@ -1,0 +1,47 @@
+{
+  "Neuro": [
+    "SUBJECT",
+    "Malformação_CC",
+    "Tipo_malformação_CC"
+  ],
+  "Dados_demograficos": [
+    "SUBJECT",
+    "Idade",
+    "Situação"
+  ],
+  "Testes_neuropsicologicos": [
+    "SUBJECT",
+    "Teste",
+    "QIV",
+    "QIE",
+    "QIT"
+  ],
+  "Dados_motores_da_fala": [
+    "Subject",
+    "Idade",
+    "Sexo",
+    "Malformação_CC",
+    "Tipo_Malformação_CC",
+    "Repetição_Palavras",
+    "Repetição_frases",
+    "Séries_automaticas",
+    "Fala_espontanea",
+    "Leitura_voz_alta",
+    "Omissão_fonêmica",
+    "Adição_fonêmica",
+    "Distorção_fonêmica",
+    "Repetição_fonêmica",
+    "Substituição_fonêmica",
+    "Leitura_repetitiva",
+    "Antecipação_fonêmica",
+    "Reinteração_fonêmica",
+    "Metátese",
+    "Escala_gravidade",
+    "Apraxia_verbal",
+    "Apraxia_bucofacial",
+    "Desvio_fonológico",
+    "Atraso_motor_da_fala",
+    "Disartria",
+    "Tratamento_fonoaudiológico"
+  ]
+}

@@ -1,0 +1,212 @@
+<h1
+id="prj1509-neuroimaging-processing-pipeline-patients-vs-controls">PRJ1509
+– Neuroimaging Processing Pipeline (Patients vs Controls)</h1>
+<h2 id="project-structure">📁 Project Structure</h2>
+<p>Main scripts:</p>
+<ul>
+<li><code>clean_raw_data.sh</code> /
+<code>clean_raw_data_HCP.sh</code></li>
+<li><code>extract_DICOM.sh</code> / <code>extract_HCP.sh</code></li>
+<li><code>verify_bids.sh</code></li>
+<li><code>launch_fmriprep.sh</code></li>
+<li><code>verify_fmriprep.sh</code></li>
+<li><code>launch_melodic.sh</code></li>
+<li><code>verify_melodic.sh</code></li>
+<li><code>correlations_ICA_network.sh</code></li>
+<li><code>launch_atlas.sh</code></li>
+<li><code>launch_xcpd.sh</code> / <code>launch_xcpd_PCA.sh</code></li>
+<li><code>verify_xcpd.sh</code></li>
+</ul>
+<p>📂 Data Organization &amp; Paths</p>
+<p>All paths are relative to the project root:</p>
+<pre><code>03_PROCS/
+├── RAW_DATA/
+│   ├── DICOM/            # Patients raw DICOM data
+│   └── HCP/              # Controls (HCP raw structure)
+│
+├── PROC_DATA/
+│   ├── dataset/              # BIDS dataset (patients)
+│   ├── dataset-HCP/          # BIDS-like dataset (controls)
+│   │
+│   ├── derivatives/          # Patients outputs
+│   │   ├── fmriprep/         # fMRIPrep outputs (sub-XXX, HTML reports)
+│   │   └── melodic/          # ICA (MELODIC results)
+│   │
+│   ├── derivatives-HCP/      # Controls outputs
+│   │   ├── fmriprep/
+│   │   └── melodic/
+│   │
+│   ├── freesurfer/           # FreeSurfer outputs
+│
+├── Scripts/                  # All processing scripts (this README)
+├── atlases/                 # Atlases used for analysis
+├── csv/                     # Final outputs (correlations, metrics)
+└── install/                 # Software installations (FSL, etc.)</code></pre>
+<p>🔑 Key Locations Raw data (patients): RAW_DATA/DICOM/ Raw data
+(controls): RAW_DATA/HCP/ BIDS dataset (patients): dataset/ BIDS dataset
+(controls): dataset-HCP/ fMRIPrep outputs (patients):
+PROC_DATA/derivatives/fmriprep/ fMRIPrep outputs (controls):
+PROC_DATA/derivatives-HCP/fmriprep/ ICA (MELODIC): inside derivatives/
+and derivatives-HCP/</p>
+<h1 id="overview">🧠 Overview</h1>
+<p>This pipeline processes two types of datasets:</p>
+<ul>
+<li><strong>Patients</strong> → local DICOM data</li>
+<li><strong>Controls</strong> → HCP dataset</li>
+</ul>
+<p>Each dataset follows a similar structure:</p>
+<ol type="1">
+<li>Raw data cleaning</li>
+<li>Extraction to NIfTI</li>
+<li>BIDS formatting</li>
+<li>Preprocessing (fMRIPrep)</li>
+<li>ICA decomposition (MELODIC)</li>
+<li>Post-processing / analysis</li>
+</ol>
+<hr />
+<h1 id="patients-pipeline">🧍 PATIENTS PIPELINE</h1>
+<h2 id="clean-raw-dicom-data">1. Clean raw DICOM data</h2>
+<p>Remove non-neuroimaging sequences (scout, angiography, etc.) to
+aliviate the disk:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> clean_raw_data.sh</span></code></pre></div>
+<hr />
+<h2 id="convert-dicom-bids-nifti">2. Convert DICOM → BIDS (NIfTI)</h2>
+<p>Extract relevant sequences (T1, T2, resting-state, fieldmaps,
+diffusion):</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> extract_DICOM.sh</span></code></pre></div>
+<hr />
+<h2 id="verify-bids-dataset">3. Verify BIDS dataset</h2>
+<p>Check that all required files are present:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> verify_bids.sh</span></code></pre></div>
+<hr />
+<h2 id="run-fmriprep">4. Run fMRIPrep</h2>
+<p>Preprocessing (motion correction, normalization, etc.):</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_fmriprep.sh</span></code></pre></div>
+<hr />
+<h2 id="verify-fmriprep-outputs">5. Verify fMRIPrep outputs</h2>
+<p>Check for missing subjects or failed runs:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> verify_fmriprep.sh</span></code></pre></div>
+<hr />
+<h2 id="run-ica-decomposition-melodic">6. Run ICA decomposition
+(MELODIC)</h2>
+<p>Independent Component Analysis on resting-state:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_melodic.sh</span></code></pre></div>
+<hr />
+<h2 id="verify-melodic-outputs">7. Verify MELODIC outputs</h2>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> verify_melodic.sh</span></code></pre></div>
+<hr />
+<h2 id="compute-ica-network-correlations">8. Compute ICA ↔︎ network
+correlations</h2>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> correlations_ICA_network.sh</span></code></pre></div>
+<hr />
+<h2 id="atlas-based-analysis-optional">9. Atlas-based analysis
+(optional)</h2>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_atlas.sh</span></code></pre></div>
+<hr />
+<h2 id="post-processing-xcp-d-optional-unfinished-work">10.
+Post-processing (XCP-D) optional, unfinished work</h2>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_xcpd.sh</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_xcpd_PCA.sh</span></code></pre></div>
+<p>Verify:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> verify_xcpd.sh</span></code></pre></div>
+<hr />
+<h1 id="controls-pipeline-hcp">🧍‍♂CONTROLS PIPELINE (HCP)</h1>
+<p>⚠ Same logic, but different input format</p>
+<hr />
+<h2 id="clean-raw-hcp-data">1. Clean raw HCP data</h2>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> clean_raw_data_HCP.sh</span></code></pre></div>
+<hr />
+<h2 id="extract-hcp-data">2. Extract HCP data</h2>
+<p>Convert HCP structure into BIDS-like dataset:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> extract_HCP.sh</span></code></pre></div>
+<hr />
+<h2 id="verify-bids-dataset-1">3. Verify BIDS dataset</h2>
+<p>⚠ Use controls mode:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> verify_bids.sh <span class="at">--controls</span></span></code></pre></div>
+<hr />
+<h2 id="run-fmriprep-1">4. Run fMRIPrep</h2>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_fmriprep.sh <span class="at">--controls</span></span></code></pre></div>
+<hr />
+<h2 id="verify-fmriprep">5. Verify fMRIPrep</h2>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> verify_fmriprep.sh <span class="at">--controls</span></span></code></pre></div>
+<hr />
+<h2 id="run-melodic">6. Run MELODIC</h2>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_melodic.sh <span class="at">--controls</span></span></code></pre></div>
+<hr />
+<h2 id="verify-melodic">7. Verify MELODIC</h2>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> verify_melodic.sh <span class="at">--controls</span></span></code></pre></div>
+<hr />
+<h2 id="ica-network-correlations">8. ICA ↔︎ network correlations</h2>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> correlations_ICA_network.sh <span class="at">--controls</span></span></code></pre></div>
+<hr />
+<h2 id="atlas-analysis">9. Atlas analysis</h2>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_atlas.sh <span class="at">--controls</span></span></code></pre></div>
+<hr />
+<h2 id="post-processing-xcp-d">10. Post-processing (XCP-D)</h2>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_xcpd.sh <span class="at">--controls</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> launch_xcpd_PCA.sh <span class="at">--controls</span></span></code></pre></div>
+<p>Verify:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> verify_xcpd.sh <span class="at">--controls</span></span></code></pre></div>
+<hr />
+<h1 id="notes">⚠ Notes</h1>
+<ul>
+<li>Re-running scripts is safe: existing outputs are skipped</li>
+<li>Always verify each step before moving to the next</li>
+</ul>
+<hr />
+<h1 id="typical-order-summary">🚀 Typical Order Summary</h1>
+<h3 id="patients">Patients</h3>
+<pre><code>clean_raw_data.sh
+→ extract_DICOM.sh
+→ verify_bids.sh
+→ launch_fmriprep.sh
+→ verify_fmriprep.sh
+→ launch_melodic.sh
+→ verify_melodic.sh
+→ correlations_ICA_network.sh
+→ launch_atlas.sh
+→ launch_xcpd.sh
+→ verify_xcpd.sh</code></pre>
+<h3 id="controls">Controls</h3>
+<pre><code>clean_raw_data_HCP.sh
+→ extract_HCP.sh
+→ verify_bids.sh --controls
+→ launch_fmriprep.sh --controls
+→ verify_fmriprep.sh --controls
+→ launch_melodic.sh --controls
+→ verify_melodic.sh --controls
+→ correlations_ICA_network.sh --controls
+→ launch_atlas.sh --controls
+→ launch_xcpd.sh --controls
+→ verify_xcpd.sh --controls</code></pre>
+<hr />
+<h1 id="output">📊 Output</h1>
+<p>Final outputs include:</p>
+<ul>
+<li>Preprocessed BOLD data</li>
+<li>ICA components</li>
+<li>Network correlation matrices (<code>csv/</code>)</li>
+<li>Atlas-based metrics</li>
+</ul>
