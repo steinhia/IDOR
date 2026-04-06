@@ -25,7 +25,7 @@ All data are harmonized into a common format to enable downstream statistical an
 
 ## Dependencies
 
-* All scripts run after installing the conda environment from file : XXX TODO
+* All scripts run after installing the conda environment from file from the env/ directory : conda env create -f environment.yml
 * If you don't want to use conda, make sure to have all these libraries available:
   * Python 3.x
   * pandas

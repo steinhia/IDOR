@@ -1,0 +1,8 @@
+name: IDOR
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas
+  - openpyxl
+prefix: /home/alexandra/miniconda3/envs/IDOR
