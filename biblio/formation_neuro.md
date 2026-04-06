@@ -1,3 +1,5 @@
+### personal notes, Marina's class  
+  
 
 T2 couleurs contraires T1 (bonne résolution) -> différentes pondérations
 Bold -> oxygenation du cerveau (moins bonne résolution) au cours du temps
