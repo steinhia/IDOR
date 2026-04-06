@@ -1,0 +1,129 @@
+---
+title: Stats Julio
+author: Alexandra Steinhilber
+date: 18-01-2023
+output: 
+    html_document
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+
+```{r}
+# Data
+  
+save_image <- function(name, width = NULL) {
+  file <- paste0(path, "/img/", name)
+  if (is.null(width)) {
+    ggsave(file)
+  } else {
+    ggsave(file, width = width)
+  }
+}
+  
+transform_com_déficit<-function(df,col_list){
+df %>% mutate(across(all_of(col_list), ~ ifelse(.x == "Sem déficit", 0, ifelse(.x == "Com déficit", 1, ""))))
+}
+
+transform_déficit_sim_nao<-function(df,col_list){
+df %>% mutate(across(all_of(col_list), ~ if_else(.x=="Sim",1,if_else(.x=="Não",0,NA))))
+}
+
+transform_partial <- function(df){
+    df %>% filter(Malformação_CC!="À confirmar" & Malformação_CC!="Hiperplasia") %>%
+        mutate(Malformação_CC=if_else(Malformação_CC=="DCC Total","DCC Total","DCC Parcial"))
+}
+### File extraction
+Neuro = read.csv("csv/Neuro.csv") %>% filter(Malformação_CC != "") %>% transform_partial()
+MAC = read.csv("csv/MAC.csv") %>% filter(Avaliado != "Não")
+Motor = read.csv("csv/Dados_motores_da_fala.csv")
+Psycho = read.csv("csv/Testes_neuropsicologicos.csv") %>% filter(Teste != "")
+
+### Classificação into numeric
+col_names <- colnames(MAC)
+col_classificaçao <-  grep("_Classificação", col_names, value = TRUE)
+MAC <- MAC %>% transform_com_déficit(col_classificaçao)
+Neuro = Neuro %>% transform_partial()
+
+### Merge
+MAC_merged <- Reduce(function(x, y) merge(x, y, by = "Subject"), list(Neuro, MAC, Motor, Psycho))
+
+
+```
+
+```{r}
+  
+col_names <- colnames(MAC)
+col_class <- grep(paste0("_Classificação"), col_names, value = TRUE)
+  
+######################
+# Categorisation #####  
+#####################
+
+models <- lapply(col_class, function(score_name) {
+  data_model <- MAC_merged %>% select(Malformação_CC, all_of(score_name)) %>%
+    filter(Malformação_CC != "") %>%   
+    filter(.data[[score_name]] ==  0| .data[[score_name]] == 1)
+  data_model$Malformação_CC <- factor(data_model$Malformação_CC)
+  data_model[[paste0(score_name)]] <- data_model[[score_name]] > 0
+  model<-glm(as.formula(paste0(score_name, " ~ Malformação_CC")), data = data_model, family = binomial)
+  print(score_name)
+  readline(prompt = "Appuyez sur Entrée pour continuer...")
+  print(summary(model))
+  print(score_name)
+  readline(prompt = "Appuyez sur Entrée pour continuer...")
+})
+  
+  
+```
+
+```{r}
+
+######################
+# Escore #####  
+#####################
+
+col_escore <- grep(paste0("_Escore"), col_names, value = TRUE)
+models <- lapply(col_escore, function(score_name) {
+  # Ajuster le modèle GLM avec la colonne transformée
+  data_model <- MAC_merged %>% select(Malformação_CC, all_of(score_name)) %>%
+    filter(Malformação_CC != "") %>%   
+    filter(.data[[score_name]] != "") 
+  print(data_model)
+  #data_model$Malformação_CC <- factor(data_model$Malformação_CC)
+  #data_model[[paste0(score_name)]] <- data_model[[score_name]] > 0
+  #model<-glm(as.formula(paste0(score_name, " ~ Malformação_CC")), data = data_model, family = binomial)
+  #print(score_name)
+  #readline(prompt = "Appuyez sur Entrée pour continuer...")
+  #print(summary(model))
+  #print(score_name)
+  #readline(prompt = "Appuyez sur Entrée pour continuer...")
+})
+  # Créer une nouvelle colonne temporaire 'score_num' selon la règle adaptée
+  #print(score_name)
+  #print(MAC_merged %>% select(score_name,Malformação_CC))
+  #readline(prompt = "Appuyez sur Entrée pour continuer...")
+  #MAC_num <- MAC_merged %>%
+    #separate(!!sym(score_name), into = c("num", "denom"), sep = "/", convert = TRUE, fill = "right") #%>%
+    #mutate(score_num = case_when(
+    #  name == score_name & !is.na(denom) ~ as.numeric(num) / as.numeric(denom),
+    #  name == score_name & is.na(denom)  ~ as.numeric(num) / 100,
+    #  TRUE                               ~ as.numeric(num)
+    #))
+
+#names(models) <- scores
+
+# Pour afficher par exemple le résumé du premier modèle
+#summary(models[[1]])
+  
+
+# Pour nommer les modèles avec les noms des colonnes
+  
+# Escore fct DCC parcial/total
+#model<-glm(success ~ context_sem * oral * type , data=data0_acc, family=binomial(link="logit"))
+#summary(model)
+```
